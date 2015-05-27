@@ -4,9 +4,9 @@ var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
 // using brfs transform
-var fs = require('fs');
-var text = fs.readFileSync(__dirname + '/../../../resources/examples.json', 'utf8');
-var examples = JSON.parse(text);
+// var fs = require('fs');
+// var text = fs.readFileSync(__dirname + '/../../../resources/examples.json', 'utf8');
+var examples = {}//JSON.parse(text);
 
 var ActionTypes = Constants.ActionTypes;
 

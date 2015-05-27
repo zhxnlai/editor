@@ -2,10 +2,7 @@ var React = require('react');
 var Router = require('react-router');
 var assign = require('object-assign');
 
-var Input = require('../components/Input.jsx');
-var Control = require('../components/Control.jsx');
-var Examples = require('../components/Examples.jsx');
-var Visualization = require('../components/Visualization.jsx');
+var MathEditor = require('../components/MathEditor.jsx');
 
 var EditorStore = require('../../stores/EditorStore.js');
 
@@ -39,14 +36,7 @@ var Demo = React.createClass({
   render: function() {
     return (
       <div className="demo-page">
-        <div className="leftPanel">
-          <Input/>
-          <Control/>
-          <Examples/>
-        </div>
-        <div className="rightPanel">
-          <Visualization/>
-        </div>
+        <MathEditor/>
       </div>
     );
   }

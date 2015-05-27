@@ -35,10 +35,7 @@ var Demo = React.createClass({
     // load grammar from script tag
     EditorActionCreators.didMount();
     // http://patorjk.com/software/taag/#p=display&f=Ivrit&t=Prolog%20Visualizer!
-    console.log("  ____            _              __     ___                 _ _              _ \n |  _ \\ _ __ ___ | | ___   __ _  \\ \\   / (_)___ _   _  __ _| (_)_______ _ __| |\n | |_) | '__/ _ \\| |/ _ \\ / _` |  \\ \\ / /| / __| | | |/ _` | | |_  / _ \\ '__| |\n |  __/| | | (_) | | (_) | (_| |   \\ V / | \\__ \\ |_| | (_| | | |/ /  __/ |  |_|\n |_|   |_|  \\___/|_|\\___/ \\__, |    \\_/  |_|___/\\__,_|\\__,_|_|_/___\\___|_|  (_)\n                          |___/                                                ");
-    // console.log("Join us at career.cdglabs.com");
 
-    // add link to app bar title
     var titleEl = document.querySelector(".mui-app-bar-title");
     if (titleEl) {
       titleEl.innerHTML = "<a href='#/'>"+titleEl.innerText+"</a>";
@@ -64,7 +61,7 @@ var Demo = React.createClass({
   },
 
   render: function() {
-    var title = "Prolog Visualizer";
+    var title = "Editor";
 
     var helpButton = (
       <IconButton className="help-button" onTouchTap={this.onHelpButtonTouchTap}>
@@ -88,6 +85,12 @@ var Demo = React.createClass({
         href="https://github.com/cdglabs/prolog"
         linkButton={true}/>
     );
+    var rightButtons = (<div className="appbar-icon-group">
+      {helpButton}
+      {grammarButton}
+      {infoButton}
+      {githubButton}
+    </div>);
 
     //Standard Actions
     var standardActions = [
@@ -116,12 +119,6 @@ var Demo = React.createClass({
           title={title}
           zDepth={1}
           showMenuIconButton={false}>
-          <div className="appbar-icon-group">
-            {helpButton}
-            {grammarButton}
-            {infoButton}
-            {githubButton}
-          </div>
         </AppBar>
 
         <RouteHandler key={"pv"} /*this.getPath()*/ />

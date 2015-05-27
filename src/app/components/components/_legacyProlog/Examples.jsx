@@ -43,16 +43,9 @@ var Examples = React.createClass({
     var classes = this.getClasses('examples', {
     });
 
-    var rows = this.state.examples.map(example =>
-      <div key={example.name} className="example">
-        <a onClick={this.onLinkClicked.bind(this, example.name)}>{example.name}</a>
-      </div>
-    );
 
     return (
       <div className={classes} >
-        <h4 className="title">Examples</h4>
-        {rows}
       </div>
       );
     }
