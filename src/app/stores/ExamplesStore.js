@@ -18,20 +18,6 @@ var store = function() {
       return examples;
     },
 
-    loadExamplesFromURL: function(url) {
-      request
-      .get(url)
-      .end(function(err, res){
-        // Calling the end function will send the request
-        if (!err) {
-          var newExamples = JSON.parse(res.text);
-          if (Array.isArray(newExamples)) {
-            examples = newExamples;
-            ExamplesStore.emitChange();
-          }
-        }
-      });
-    }
   };
 };
 
@@ -59,8 +45,6 @@ ExamplesStore.dispatchToken = AppDispatcher.register(function(payload) {
   switch (action.type) {
     case ActionTypes.DID_MOUNT:
       // load json from the web
-      // https://raw.githubusercontent.com/cdglabs/prolog/master/resources/examples.json
-      // ExamplesStore.loadExamplesFromURL("https://cdn.rawgit.com/cdglabs/prolog/master/resources/examples.json");
       break;
 
     default:

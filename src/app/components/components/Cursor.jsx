@@ -49,7 +49,7 @@ var Cursor = React.createClass({
     };
 
     return (
-      <div className="cursor" style={cursorStyle}/>
+      <div className="editorCursor" style={cursorStyle}/>
       );
     }
 });

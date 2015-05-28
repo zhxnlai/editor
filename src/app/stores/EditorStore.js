@@ -3,7 +3,6 @@ var Constants = require('../constants/Constants');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 var ohm = require('../libs/ohm.min.js');
-var PrologInterpreter = require('../libs/prolog/prolog.js');
 var EditorActionCreators = require('../actions/EditorActionCreators.js');
 
 var ActionTypes = Constants.ActionTypes;
@@ -11,16 +10,13 @@ var ActionTypes = Constants.ActionTypes;
 var CHANGE_EVENT = 'change';
 var DEFAULT_TEXT = "father(orville, abe).\nfather(abe, homer).\nfather(homer, bart).\nfather(homer, lisa).\nfather(homer, maggie).\ngrandfather(X, Y) :- father(X, Z), father(Z, Y).\ngrandfather(X, Y)?";
 // HTML5 storage API
-var SOURCE_KEY = "prologVisualizer__";
+var SOURCE_KEY = "__editor__";
 var storageAvailable = typeof(Storage) !== "undefined";
 
 // TODO: setters should be private to file scope
 var store = function() {
   var g; // grammar
   var text = storageAvailable && localStorage.getItem(SOURCE_KEY) ? localStorage.getItem(SOURCE_KEY) : DEFAULT_TEXT; // code
-  var L; // interpreter
-  var traceIter;
-  var showOnlyCompatible = false;
   var syntaxError;
 
   return {
@@ -32,15 +28,10 @@ var store = function() {
       if (storageAvailable) {
         localStorage.setItem(SOURCE_KEY, value);
       }
-      this.updateProgram();
     },
 
-    getShowOnlyCompatible: function() {
-      return showOnlyCompatible;
-    },
-    setShowOnlyCompatible: function(on) {
-      showOnlyCompatible = on;
-      this.updateProgram();
+    getOhm: function() {
+      return ohm;
     },
 
     getGrammar: function(namespace, domId, grammar) {
@@ -49,59 +40,18 @@ var store = function() {
           g = ohm.namespace(namespace)
             .loadGrammarsFromScriptElement(document.getElementById(domId))
             .grammar(grammar);
-          L = PrologInterpreter(g);
         } catch (err) {
           g = undefined;
           console.log(err);
         }
       }
-      this.updateProgram();
       return g;
     },
 
-    updateProgram: function() {
-      if (g) {
-        try {
-          traceIter = L.solve(text, showOnlyCompatible);
-          syntaxError = undefined;
-          this.emitChange();
-        } catch (e) {
-          if (e instanceof ohm.error.MatchFailure) {
-            syntaxError = e;
-          } else {
-            syntaxError = undefined;
-            throw e;
-          }
-        }
-      }
-    },
     getSyntaxError: function() {
       return syntaxError;
     },
 
-    getTraceIter: function() {
-      return traceIter;
-    },
-    stepForward: function() {
-      if (traceIter) {
-        traceIter.forward();
-      } else {
-        console.log("traceIter is undefined");
-      }
-    },
-    stepBackward: function() {
-      if (traceIter) {
-        traceIter.backward();
-      } else {
-        console.log("traceIter is undefined");
-      }
-    },
-    setStep: function(step) {
-      if (traceIter.getStep !== step) {
-        traceIter.setStep(step);
-        return true;
-      }
-    }
   };
 };
 

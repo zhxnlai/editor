@@ -12,21 +12,9 @@
   <link rel="stylesheet" type="text/css" href="main.css">
 
   <script type="text/ohm-js" id="arithmetic">
-
   L {
-    Exprs
-      = SeqExpr
-
     Expr
-      = SetExpr
-
-    SeqExpr
-      = SetExpr SeqExpr  -- seq
-      | SetExpr
-
-    SetExpr
-      = ident '=' SetExpr  -- set
-      | AddExpr
+      = AddExpr
 
     AddExpr
       = AddExpr '+' MulExpr  -- plus

@@ -51,6 +51,7 @@
   "dependencies": {
     "babel": "^5.4.7",
     "flux": "^2.0.3",
+    "keymaster": "^1.6.2",
     "keymirror": "^0.1.1",
     "marked": "^0.3.3",
     "material-ui": "^0.7.5",

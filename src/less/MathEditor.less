@@ -1,0 +1,33 @@
+.MathEditor {
+
+  margin: 2em;
+  display: flex;
+  white-space: pre;
+
+    font-size: 18px;
+    font-family: Droid Sans Mono, Monaco, monospace, sans-serif;
+
+  div {
+    display: flex;
+    flex-wrap: wrap ;
+    align-items: center;
+  }
+
+  .sup {
+    vertical-align: top; font-size: 0.6em;
+  }
+
+  .divide {
+    display: flex;
+    flex-direction: column;
+    > .numerator {
+      text-align: center;
+    }
+    > .denominator {
+      text-align: center;
+
+      // border-style: solid;
+      border-top: solid 1px black;
+    }
+  }
+}
